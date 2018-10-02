@@ -18,8 +18,16 @@ validTree.right.right = new BinaryNode(20);
 
 checkIfBST = (tree, prevVal, left, right) => {
     if (!tree) return true;
-    const returnLeft = checkIfBST(tree.left, tree.value, left ? Math.min(tree.value, left) : tree.value, right);
-    const returnRight = checkIfBST(tree.right, tree.value, left, right ? Math.max(tree.value, right) : tree.value);
+    const returnLeft = checkIfBST(
+        tree.left, 
+        tree.value, 
+        left ? Math.min(tree.value, left) : tree.value, 
+        right);
+    const returnRight = checkIfBST(
+        tree.right, 
+        tree.value, 
+        left, 
+        right ? Math.max(tree.value, right) : tree.value);
     if (left && right) {
         if (tree.value > left || tree.value <= right) return false;
     } else {
