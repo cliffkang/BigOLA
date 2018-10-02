@@ -74,3 +74,72 @@ mergeBST = (tree1, tree2) => {
 }
 
 console.log(mergeBST(validTree1, validTree2));
+
+/*
+class TreeNode {
+    constructor({ value, left, right }) {
+      this.value = value;
+      this.left = left;
+      this.right = right;
+    }
+  }
+  
+// Creating test data
+const nodeTwo = new TreeNode({ value: 2 });
+const nodeFour = new TreeNode({ value: 4 });
+const nodeThree = new TreeNode({ left: nodeTwo, right: nodeFour, value: 3 });
+const nodeSix = new TreeNode({ value: 6 });
+const treeOne = new TreeNode({ left: nodeThree, right: nodeSix, value: 5 });
+const nodeOne = new TreeNode({ value: 1 });
+const treeTwo = new TreeNode({ value: 7, left: nodeOne });
+
+console.log('treeOne', treeOne);
+class LinkedListNode {
+    constructor({ value, next }) {
+      this.value = value;
+      this.next = next;
+    }
+}
+  
+function bstToLinkedList(tree) {
+    // if no tree passed in, return;
+    if (!tree) return;
+    // Create linked list head
+    let linkedList = null;
+    // Create stack
+    const stack = [];
+    // Create pointer for current node
+    let currentLinkedListNode = null;
+    // Start at root node;
+    let currentNode = tree;
+    // If there are no nodes left, we're done.
+    while (currentNode || stack.length) {
+        if (currentNode) {
+            stack.push(currentNode);
+            currentNode = currentNode.left;
+        } else {
+            // There are no left nodes.
+            // Get the last node on top of tack
+            currentNode = stack.pop();
+            // create Linked List Node from current value
+            const nextNode = new LinkedListNode({
+                value: currentNode.value,
+                next: null,
+            });
+            // If there is no linked list, create one, and set it as the current linked list node
+            if (!linkedList) {
+                linkedList = nextNode;
+                currentLinkedListNode = nextNode;
+            } else {
+                // Create attach next node to current linked list node
+                currentLinkedListNode.next = nextNode;
+                // set current linked list node to next node;
+                currentLinkedListNode = currentLinkedListNode.next;
+            }
+        }
+    }
+    return linkedList;
+}
+
+console.log('linkedList', bstToLinkedList(treeOne));
+*/
