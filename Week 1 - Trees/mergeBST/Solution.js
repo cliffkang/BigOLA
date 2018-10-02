@@ -52,11 +52,13 @@ mergeTwoSortedArrays = (array1, array2) => {
 }
 
 // create BST from sorted array
-sortedArrToBst = (arr, mid, low, high) => {
+sortedArrToBst = (arr, low, high) => {
     if (low > high) return null;
+    let mid = Math.ceil((low + high) / 2);
+    while (mid + 1 <= high && arr[mid + 1] === arr[mid]) mid++;
     const root = new BinaryNode(arr[mid]);
-    root.left = sortedArrToBst(arr, Math.floor((mid - 1) / 2), 0, mid - 1);
-    root.right = sortedArrToBst(arr, Math.floor((mid + 1 + high) / 2), mid + 1, high);
+    root.left = sortedArrToBst(arr, low, mid - 1);
+    root.right = sortedArrToBst(arr, mid + 1, high);
     return root;
 }
 
@@ -66,8 +68,9 @@ mergeBST = (tree1, tree2) => {
     const tree1Arr = [], tree2Arr = [];
     fromBstToArr(tree1,tree1Arr);
     fromBstToArr(tree2,tree2Arr);
+    if (!tree1Arr.length || !tree2Arr.length) return tree1Arr.length ? tree1 : tree2;
     const sortedArr = mergeTwoSortedArrays(tree1Arr,tree2Arr);
-    return sortedArrToBst(sortedArr, Math.floor(sortedArr.length / 2), 0, sortedArr.length);
+    return sortedArrToBst(sortedArr, 0, sortedArr.length - 1);
 }
 
 console.log(mergeBST(validTree1, validTree2));
