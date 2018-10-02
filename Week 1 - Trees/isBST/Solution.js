@@ -12,7 +12,7 @@ validTree.right = new BinaryNode(15);
 validTree.left.left = new BinaryNode(2);
 validTree.left.right = new BinaryNode(7);
 validTree.left.right.left = new BinaryNode(6);
-validTree.left.right.right = new BinaryNode(12); // out of bounds here
+validTree.left.right.right = new BinaryNode(9); // out of bounds here
 validTree.right.left = new BinaryNode(12);
 validTree.right.right = new BinaryNode(20);
 
@@ -38,4 +38,12 @@ checkIfBST = (tree, prevVal, left, right) => {
     else return false;
 }
 
+isValidBST = (tree, min, max) => {
+    if (!tree) return true;
+    if (min !== null && tree.value <= min) return false;
+    if (max !== null && tree.value > max) return false;
+    return isValidBST(tree.left, min, tree.value) && isValidBST(tree.right, tree.value, max);
+}
+
 console.log(checkIfBST(validTree, validTree.value, null, null));
+console.log(isValidBST(validTree, null, null));
