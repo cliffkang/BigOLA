@@ -55,6 +55,7 @@ mergeTwoSortedArrays = (array1, array2) => {
 sortedArrToBst = (arr, low, high) => {
     if (low > high) return null;
     let mid = Math.ceil((low + high) / 2);
+    // moves up index of mid if the the next value in sorted arr is the same
     while (mid + 1 <= high && arr[mid + 1] === arr[mid]) mid++;
     const root = new BinaryNode(arr[mid]);
     root.left = sortedArrToBst(arr, low, mid - 1);
