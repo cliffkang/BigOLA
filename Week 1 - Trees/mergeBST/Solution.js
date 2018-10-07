@@ -64,11 +64,12 @@ sortedArrToBst = (arr, low, high) => {
 
 
 mergeBST = (tree1, tree2) => {
-    if (!tree1 && !tree2) return 'at least one valid tree must be inputted';
+    if ((!tree1 && !tree2) || (!tree1.value && !tree2.value)) return 'at least one valid tree must be inputted';
+    if (!tree1 || !tree2) return tree1 ? tree1 : tree2;
+    if (!tree1.value || !tree2Arr.value) return tree1.value ? tree1 : tree2;
     const tree1Arr = [], tree2Arr = [];
     fromBstToArr(tree1,tree1Arr);
     fromBstToArr(tree2,tree2Arr);
-    if (!tree1Arr.length || !tree2Arr.length) return tree1Arr.length ? tree1 : tree2;
     const sortedArr = mergeTwoSortedArrays(tree1Arr,tree2Arr);
     return sortedArrToBst(sortedArr, 0, sortedArr.length - 1);
 }
