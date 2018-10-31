@@ -24,7 +24,7 @@ function createBoard(numberOfCells, ladders, snakes) {
   function getMinThrows(board, numberOfCells) {
     // visited tracks memoization
     const visited = {};
-    let q = [{ position: 0, moves: 0, positionsVisited: '' }];
+    const q = [{ position: 0, moves: 0, positionsVisited: '' }];
     while (q.length) {
       const current = q.shift();
       for (let i = 1; i < 7; i++) {
