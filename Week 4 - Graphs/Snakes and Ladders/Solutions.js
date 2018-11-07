@@ -28,10 +28,13 @@ function createBoard(numberOfCells, ladders, snakes) {
     while (q.length) {
       const current = q.shift();
       for (let i = 1; i < 7; i++) {
-        const newPosition = board[current.position + i] === -1 ? current.position + i : board[current.position + i];
+        const positionChecked = current.position + i;
+        const newPosition = board[positionChecked] === -1 ? positionChecked : board[positionChecked];
         if (!visited[newPosition]) {
           visited[newPosition] = true;
-          if (newPosition === numberOfCells - 1) { 
+          if (newPosition === numberOfCells - 1) {
+            current.position = newPosition;
+            current.moves++;
             current.positionsVisited += ` ${newPosition}`;
             return current;
           }
@@ -39,7 +42,7 @@ function createBoard(numberOfCells, ladders, snakes) {
         }
       }
       // not reasonable solution
-      if (current.moves === 20) return -1;
+      if (current.moves === numberOfCells) return -1;
     }
   }
   
